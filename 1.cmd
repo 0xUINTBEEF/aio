@@ -1,4 +1,4 @@
-@set masver=1.1
+@set masver=1.4
 @setlocal DisableDelayedExpansion
 @echo off
 
@@ -42,9 +42,6 @@ exit /b
 
 set "blank="
 set "mas=ht%blank%tps%blank%://uintptr.co/"
-
-::  Check if Null service is working, it's important for the batch script
-
 sc query Null | find /i "RUNNING"
 if %errorlevel% NEQ 0 (
 echo:
@@ -225,22 +222,22 @@ echo:
 echo:
 echo:       ______________________________________________________________
 echo:
-echo:                 Activation Methods:
+echo:                 Aktivasyon Sec Kanka:
 echo:
-echo:             [1] HWID        ^|  Windows           ^|   Permanent
-echo:             [2] Ohook       ^|  Office            ^|   Permanent
-echo:             [3] KMS38       ^|  Windows           ^|   Year 2038
-echo:             [4] Online KMS  ^|  Windows / Office  ^|    180 Days
+echo:             [1] HWID        ^|  Windows           ^|   Kalici
+echo:             [2] Ohook       ^|  Office            ^|   Kalici
+echo:             [3] KMS38       ^|  Windows           ^|   2038'e kadar
+echo:             [4] Online KMS  ^|  Windows / Office  ^|    180 Gun
 echo:             __________________________________________________      
 echo:
-echo:             [5] Activation Status
-echo:             [6] Troubleshoot
-echo:             [7] Extras
-echo:             [8] Help
-echo:             [0] Exit
+echo:             [5] Aktivasyon Durumu
+echo:             [6] Sorun mu var? Turkiye'nin kendisi sorun zaten.
+echo:             [7] Ekstralar
+echo:             [8] Yardim
+echo:             [0] Cikis, hadi bana eyv.
 echo:       ______________________________________________________________
 echo:
-call :_color2 %_White% "          " %_Green% "Enter a menu option in the Keyboard [1,2,3,4,5,6,7,8,0] :"
+call :_color2 %_White% "          " %_Green% "Klavyeni kullan dostum, beynini degil. [1,2,3,4,5,6,7,8,0] :"
 choice /C:123456780 /N
 set _erl=%errorlevel%
 
@@ -260,7 +257,7 @@ goto :MainMenu
 :Extras
 
 cls
-title  Extras
+title  Ekstralar
 mode 76, 30
 echo:
 echo:
@@ -269,19 +266,19 @@ echo:
 echo:
 echo:       ______________________________________________________________
 echo:
-echo:             [1] Change Windows Edition
+echo:             [1] Windows Surumunu Degistir
 echo:
-echo:             [2] Extract $OEM$ Folder
+echo:             [2] $OEM$ Dosyasini Cikart
 echo:
-echo:             [3] Activation Status [vbs]
+echo:             [3] Aktivasyon Durumu [vbs]
 echo:
-echo:             [4] Download Genuine Windows / Office
+echo:             [4] Orijinal Windows / Office Kalibi Indir
 echo:             __________________________________________________      
 echo:                                                                     
-echo:             [0] Go to Main Menu
+echo:             [0] Ana Menu
 echo:       ______________________________________________________________
 echo:
-call :_color2 %_White% "           " %_Green% "Enter a menu option in the Keyboard [1,2,3,4,0] :"
+call :_color2 %_White% "           " %_Green% "Klavyeni kullan dostum, beynini degil. [1,2,3,4,0] :"
 choice /C:12340 /N
 set _erl=%errorlevel%
 
