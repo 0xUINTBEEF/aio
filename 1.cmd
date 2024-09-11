@@ -1,4 +1,4 @@
-@set uintDEV=1.6 STABİL SÜRÜM
+@set uintDEV=1.6_STABLE_VERSION
 @setlocal DisableDelayedExpansion
 @echo off
 
