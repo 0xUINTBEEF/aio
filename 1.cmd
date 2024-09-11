@@ -1,26 +1,17 @@
-@set masver=1.4
+@set uintDEV=1.6 STABİL SÜRÜM
 @setlocal DisableDelayedExpansion
 @echo off
-
-::========================================================================================================================================
-
-::  Set Path variable, it helps if it is misconfigured in the system
 
 set "PATH=%SystemRoot%\System32;%SystemRoot%\System32\wbem;%SystemRoot%\System32\WindowsPowerShell\v1.0\"
 if exist "%SystemRoot%\Sysnative\reg.exe" (
 set "PATH=%SystemRoot%\Sysnative;%SystemRoot%\Sysnative\wbem;%SystemRoot%\Sysnative\WindowsPowerShell\v1.0\;%PATH%"
 )
-
-:: Re-launch the script with x64 process if it was initiated by x86 process on x64 bit Windows
-:: or with ARM64 process if it was initiated by x86/ARM32 process on ARM64 Windows
-
 set "_cmdf=%~f0"
 for %%# in (%*) do (
 if /i "%%#"=="r1" set r1=1
 if /i "%%#"=="r2" set r2=1
 if /i "%%#"=="-qedit" (
 reg add HKCU\Console /v QuickEdit /t REG_DWORD /d "1" /f 1>nul
-rem check the code below admin elevation to understand why it's here
 )
 )
 
@@ -29,8 +20,6 @@ setlocal EnableDelayedExpansion
 start %SystemRoot%\Sysnative\cmd.exe /c ""!_cmdf!" %* r1"
 exit /b
 )
-
-:: Re-launch the script with ARM32 process if it was initiated by x64 process on ARM64 Windows
 
 if exist %SystemRoot%\SysArm32\cmd.exe if %PROCESSOR_ARCHITECTURE%==AMD64 if not defined r2 (
 setlocal EnableDelayedExpansion
@@ -72,7 +61,7 @@ popd
 
 cls
 color 07
-title  Microsoft_Activation_Scripts %masver%
+title  Microsoft_Activation_Scripts %uintDEV%
 
 set _args=
 set _elev=
@@ -213,7 +202,7 @@ setlocal EnableDelayedExpansion
 
 cls
 color 07
-title  Microsoft_Activation_Scripts %masver%
+title  Microsoft_Activation_Scripts %uintDEV%
 mode 76, 30
 
 echo:
@@ -222,22 +211,22 @@ echo:
 echo:
 echo:       ______________________________________________________________
 echo:
-echo:                 Aktivasyon Sec Kanka:
+echo:                Aktivasyon Secin
 echo:
 echo:             [1] HWID        ^|  Windows           ^|   Kalici
 echo:             [2] Ohook       ^|  Office            ^|   Kalici
 echo:             [3] KMS38       ^|  Windows           ^|   2038'e kadar
-echo:             [4] Online KMS  ^|  Windows / Office  ^|    180 Gun
+echo:             [4] Online KMS  ^|  Windows / Office  ^|   180 Gun
 echo:             __________________________________________________      
 echo:
 echo:             [5] Aktivasyon Durumu
-echo:             [6] Sorun mu var? Turkiye'nin kendisi sorun zaten.
+echo:             [6] Sorun mu var? 
 echo:             [7] Ekstralar
 echo:             [8] Yardim
-echo:             [0] Cikis, hadi bana eyv.
+echo:             [0] Cikis.
 echo:       ______________________________________________________________
 echo:
-call :_color2 %_White% "          " %_Green% "Klavyeni kullan dostum, beynini degil. [1,2,3,4,5,6,7,8,0] :"
+call :_color2 %_White% "          " %_Green% "Secim yapmak icin klavye kullanabilirsiniz: [1,2,3,4,5,6,7,8,0] :"
 choice /C:123456780 /N
 set _erl=%errorlevel%
 
@@ -278,7 +267,7 @@ echo:
 echo:             [0] Ana Menu
 echo:       ______________________________________________________________
 echo:
-call :_color2 %_White% "           " %_Green% "Klavyeni kullan dostum, beynini degil. [1,2,3,4,0] :"
+call :_color2 %_White% "           " %_Green% "Secim yapmak icin klavye kullanabilirsiniz: [1,2,3,4,0] :"
 choice /C:12340 /N
 set _erl=%errorlevel%
 
@@ -419,7 +408,7 @@ set _NoEditionChange=0
 
 cls
 color 07
-title  HWID Activation %masver%
+title  HWID Activation %uintDEV%
 
 set _args=
 set _elev=
@@ -519,7 +508,7 @@ setlocal EnableDelayedExpansion
 cls
 mode 110, 34
 if exist "%Systemdrive%\Windows\System32\spp\store_test\" mode 134, 34
-title  HWID Activation %masver%
+title  HWID Activation %uintDEV%
 
 echo:
 echo Initializing...
@@ -1624,7 +1613,7 @@ set _rem=0
 
 cls
 color 07
-title  Ohook Activation %masver%
+title  Ohook Activation %uintDEV%
 
 set _args=
 set _elev=
@@ -1720,7 +1709,7 @@ if %_rem%==1 goto :oh_uninstall
 if %_unattended%==0 (
 cls
 mode 76, 25
-title  Ohook Activation %masver%
+title  Ohook Activation %uintDEV%
 
 echo:
 echo:
@@ -1756,7 +1745,7 @@ cls
 mode 130, 32
 %psc% "&{$W=$Host.UI.RawUI.WindowSize;$B=$Host.UI.RawUI.BufferSize;$W.Height=32;$B.Height=300;$Host.UI.RawUI.WindowSize=$W;$Host.UI.RawUI.BufferSize=$B;}"
 
-title  Ohook Activation %masver%
+title  Ohook Activation %uintDEV%
 
 echo:
 echo Initializing...
@@ -2116,7 +2105,7 @@ goto :dk_done
 
 cls
 mode 99, 28
-title  Uninstall Ohook Activation %masver%
+title  Uninstall Ohook Activation %uintDEV%
 
 set _present=
 set _unerror=
@@ -2919,7 +2908,7 @@ set _NoEditionChange=0
 
 cls
 color 07
-title  KMS38 Activation %masver%
+title  KMS38 Activation %uintDEV%
 
 set _args=
 set _elev=
@@ -3019,7 +3008,7 @@ if %_rem%==1 goto :k_uninstall
 if %_unattended%==0 (
 cls
 mode 76, 25
-title  KMS38 Activation %masver%
+title  KMS38 Activation %uintDEV%
 
 echo:
 echo:
@@ -3051,7 +3040,7 @@ goto :k_menu
 cls
 mode 110, 34
 if exist "%Systemdrive%\Windows\System32\spp\store_test\" mode 134, 34
-title  KMS38 Activation %masver%
+title  KMS38 Activation %uintDEV%
 
 echo:
 echo Initializing...
@@ -3525,7 +3514,7 @@ goto :dk_done
 
 cls
 mode 99, 28
-title  Remove KMS38 Protection %masver%
+title  Remove KMS38 Protection %uintDEV%
 
 %nul% reg delete "HKLM\%specific_kms%" /f
 %nul% reg delete "HKU\S-1-5-20\%specific_kms%" /f
@@ -3771,7 +3760,7 @@ exit /b
 
 cls
 color 07
-title  Online KMS Activation %masver%
+title  Online KMS Activation %uintDEV%
 
 ::  You are not supposed to edit anything below this.
 
@@ -3897,7 +3886,7 @@ if defined _unattended if not defined _unattendedact goto Done
 
 ::========================================================================================================================================
 
-set "_title=Online KMS Activation %masver%"
+set "_title=Online KMS Activation %uintDEV%"
 set _gui=
 
 :_KMS_Menu
@@ -4106,7 +4095,7 @@ mode con cols=98 lines=31
 %psc% "&%_buf%"
 title  %_title%
 ) else (
-title  Online KMS Activation %masver%
+title  Online KMS Activation %uintDEV%
 )
 
 if defined _gui if %_Debug%==1 mode con cols=98 lines=30
@@ -6900,7 +6889,7 @@ goto :eof
 
 cls
 mode con: cols=91 lines=30
-title Online KMS Complete Uninstall %masver%
+title Online KMS Complete Uninstall %uintDEV%
 
 set "key=HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\taskcache\tasks"
 
@@ -7011,7 +7000,7 @@ exit /b
 
 cls
 mode con cols=91 lines=30
-title  Install Activation Auto-Renewal %masver%
+title  Install Activation Auto-Renewal %uintDEV%
 
 set error_=
 set "_dest=%ProgramFiles%\Activation-Renewal"
@@ -7040,7 +7029,7 @@ if exist "%_temp%\.*" rmdir /s /q "%_temp%\" %nul%
 
 call :createInfo.txt
 %psc% "$f=[io.file]::ReadAllText('!_batp!') -split \":_extracttask\:.*`r`n\"; [io.file]::WriteAllText('%_dest%\Activation_task.cmd', '@REM Dummy ' + '%random%' + [Environment]::NewLine + $f[1].Trim(), [System.Text.Encoding]::ASCII);"
-title  Install Activation Auto-Renewal %masver%
+title  Install Activation Auto-Renewal %uintDEV%
 
 ::========================================================================================================================================
 
@@ -8633,7 +8622,7 @@ PrintLicensesInformation -Mode "Device"
 
 cls
 color 07
-title  Troubleshoot %masver%
+title  Troubleshoot %uintDEV%
 
 set _args=
 set _elev=
@@ -8700,7 +8689,7 @@ setlocal EnableDelayedExpansion
 
 cls
 color 07
-title  Troubleshoot %masver%
+title  Troubleshoot %uintDEV%
 mode con cols=77 lines=30
 
 echo:
@@ -9693,7 +9682,7 @@ set _stg=0
 
 cls
 color 07
-title  Change Windows Edition %masver%
+title  Change Windows Edition %uintDEV%
 
 set _args=
 set _elev=
